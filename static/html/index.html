@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Детекция объектов</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Загрузка изображения</h1>
+
+        <!-- Форма выбора и загрузки файла -->
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Загрузить</button>
+        </form>
+
+        <!-- Отображение загруженного фото -->
+        {% if image_url %}
+            <div class="result">
+                <h2>Загруженное фото:</h2>
+                <img src="{{ image_url }}" alt="Загруженное изображение">
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
