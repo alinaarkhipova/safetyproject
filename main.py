@@ -1,6 +1,9 @@
 import os
+import cv2
 from flask import Flask, render_template, request, url_for
 from werkzeug.utils import secure_filename
+from model import model
+
 
 app = Flask(__name__, template_folder='static/html', static_folder='static')
 
@@ -20,8 +23,8 @@ def index():
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(filepath)
 
-            # На Шаге 3 сюда добавишь вызов функции Эмины:
-            # img = model.model_img_box(img)
+            img_with_boxes = model.model_img_box(filepath)
+            cv2.imwrite(filepath, img_with_boxes)
 
             image_url = url_for('static', filename=f'uploads/{filename}')
 
